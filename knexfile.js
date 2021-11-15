@@ -1,15 +1,8 @@
 require("dotenv").config();
 const path = require("path");
 
-const {
-  NODE_ENV = "development",
-  DEV_DATABASE_URL,
-  PROD_DATABASE_URL,
-} = process.env;
-const URL =
-  NODE_ENV === "production"
-    ? PROD_DATABASE_URL
-    : DEV_DATABASE_URL;
+const { NODE_ENV = "development", DATABASE_URL } = process.env;
+const URL = NODE_ENV === "production" ? DATABASE_URL : DATABASE_URL;
 
 module.exports = {
   development: {
