@@ -8,7 +8,7 @@ async function list(req, res) {
   if (is_showing) {
     data = await (
       await moviesService.listMoviesCurrentlyShowing()
-    ).slice(0, 15);
+    )
   } else {
     data = await moviesService.list();
   }
