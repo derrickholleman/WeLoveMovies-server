@@ -6,9 +6,7 @@ async function list(req, res) {
   let data;
 
   if (is_showing) {
-    data = await (
-      await moviesService.listMoviesCurrentlyShowing()
-    )
+    data = await moviesService.listMoviesCurrentlyShowing()
   } else {
     data = await moviesService.list();
   }
