@@ -8,7 +8,9 @@ function list() {
 function listMoviesCurrentlyShowing() {
   return knex("movies as m")
     .join("movies_theaters as mt", "m.movie_id", "mt.movie_id")
-    .where({ "mt.is_showing": true });
+    .distinct("m.*")
+    .where({ "mt.is_showing": true })
+    .orderBy("m.movie_id")
 }
 
 function read(movie_id) {
