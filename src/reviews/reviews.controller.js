@@ -59,7 +59,7 @@ function hasValidReviewScore(req, res, next) {
   if (score < 1 || score > 5) {
     return next({
       status: 400,
-      message: "Score must has a value between 1 and 5",
+      message: "Score must have a value between 1 and 5",
     });
   } else {
     next();
