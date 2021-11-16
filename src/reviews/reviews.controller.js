@@ -51,9 +51,28 @@ async function reviewExists(req, res, next) {
   }
 }
 
+function hasValidReviewScore(req, res, next) {
+  const {
+    data: { score },
+  } = req.body;
+
+  if (score < 1 || score > 5) {
+    return next({
+      status: 400,
+      message: "Score must has a value between 1 and 5",
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(read)],
-  update: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(update)],
+  update: [
+    asyncErrorBoundary(reviewExists),
+    hasValidReviewScore,
+    asyncErrorBoundary(update),
+  ],
   delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)],
 };
