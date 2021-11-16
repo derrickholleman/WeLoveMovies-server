@@ -66,12 +66,31 @@ function hasValidReviewScore(req, res, next) {
   }
 }
 
+function hasValidCriticAndMovieId(req, res, next) {
+  const {
+    data: { critic_id, movie_id },
+  } = req.body;
+
+  const oldCriticId = res.locals.review.critic_id
+  const oldMovieId = res.locals.review.movie_id
+
+  if (critic_id !== oldCriticId || movie_id !== oldMovieId) {
+    return next({
+      status: 400,
+      message: "Critic and Movie ID's can't be changed",
+    });
+  } else {
+    next();
+  }
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(read)],
   update: [
     asyncErrorBoundary(reviewExists),
     hasValidReviewScore,
+    hasValidCriticAndMovieId,
     asyncErrorBoundary(update),
   ],
   delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)],
