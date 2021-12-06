@@ -41,7 +41,7 @@ function readMovieAndReviews(movie_id) {
     .join("reviews as r", "m.movie_id", "r.movie_id")
     .join("critics as c", "r.critic_id", "c.critic_id")
     .where({ "m.movie_id": movie_id })
-    .then((reviews)=>reviews.map(addCritics))
+    .then((reviews) => reviews.map(addCritics))
 }
 
 module.exports = {
