@@ -16,8 +16,7 @@ async function list(req, res) {
 
 async function read(req, res) {
   const { movie } = res.locals;
-  const data = await moviesService.read(movie.movie_id);
-  res.json({ data });
+  res.json({ data: movie });
 }
 
 async function readMovieAndTheaters(req, res) {
