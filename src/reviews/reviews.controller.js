@@ -19,6 +19,7 @@ async function update(req, res, next) {
   const { review } = res.locals;
   const updatedReview = {
     ...req.body.data,
+    // make sure ids stay the same when doing PUT
     review_id: review.review_id,
     critic_id: review.critic_id,
     movie_id: review.movie_id
